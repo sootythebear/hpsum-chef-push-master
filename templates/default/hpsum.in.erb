@@ -1,0 +1,20 @@
+#Input file sample
+SILENT = YES
+#IGNOREERRORS = ServerNotFound,BadPassword,FailedDepedencies
+SKIPTARGET = NO
+SOURCEPATH = <%= @localmount %>
+FORCEALL = YES
+REBOOTALLOWED = NO
+REBOOTDELAY = 30
+REBOOTMESSAGE = Install complete, server will reboot in 30 seconds
+ONFAILEDDEPENDENCY = OMITCOMPONENT
+LOGFILENAME = <%= @logdir %>
+COMBINED_REPORT = YES
+REPORTDIR = <%= @logdir %>
+<% @nodes[@startpos..@endpos].each do |server| -%>
+[TARGETS]
+HOST = <%= server['id'] %>
+UID = <%= server['user'] %>
+PWD = <%= server['password'] %>
+[END]
+<% end -%>
